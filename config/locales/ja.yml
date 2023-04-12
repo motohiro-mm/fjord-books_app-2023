@@ -1,5 +1,10 @@
 ja:
   activerecord:
+    notice:
+      success:
+        create: "%{model}を新規登録しました。"
+        update: "%{model}を更新しました。"
+        destroy: "%{model}を削除しました。"
     models:
       book: "書籍"
     attributes:
@@ -31,9 +36,3 @@ ja:
       submit_title: "更新"
       show_this_book: "この書籍を見る"
       back_to_books: "書籍一覧へ戻る"
-    create:
-      success: "書籍を新規登録しました。"
-    update:
-      success: "書籍を更新しました。"
-    destroy:
-      success: "書籍を削除しました。"

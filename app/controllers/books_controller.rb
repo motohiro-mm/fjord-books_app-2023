@@ -25,7 +25,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to book_url(@book), notice: t('.success') }
+        format.html { redirect_to book_url(@book), notice: success(Book.model_name.human)[:create] }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -36,7 +36,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to book_url(@book), notice: t('.success') }
+        format.html { redirect_to book_url(@book), notice: success(Book.model_name.human)[:update] }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -48,7 +48,7 @@ class BooksController < ApplicationController
     @book.destroy
 
     respond_to do |format|
-      format.html { redirect_to books_url, notice: t('.success') }
+      format.html { redirect_to books_url, notice: success(Book.model_name.human)[:destroy] }
     end
   end
 

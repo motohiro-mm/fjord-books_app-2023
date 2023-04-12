@@ -1,7 +1,12 @@
 en:
   activerecord:
+    notice:
+      success:
+        create: "%{model} was successfully created."
+        update: "%{model} was successfully updated."
+        destroy: "%{model} was successfully destroyed."
     models:
-      book: "book"
+      book: "Book"
     attributes:
       book:
         title: "Title"
@@ -31,9 +36,3 @@ en:
       submit_title: "Update Book"
       show_this_book: "Show this book"
       back_to_books: "Back to books"
-    create:
-      success: "Book was successfully created."
-    update:
-      success: "Book was successfully updated."
-    destroy:
-      success: "Book was successfully destroyed."
