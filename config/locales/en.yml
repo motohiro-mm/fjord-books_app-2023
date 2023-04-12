@@ -29,10 +29,8 @@ en:
       destroy_this_book: "Destroy this book"
     new:
       headline: "New Book"
-      submit_title: "Create Book"
       back_to_books: "Back to books"
     edit:
       headline: "Editing Book"
-      submit_title: "Update Book"
       show_this_book: "Show this book"
       back_to_books: "Back to books"
