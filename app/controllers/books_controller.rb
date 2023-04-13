@@ -25,7 +25,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to book_url(@book), notice: success(Book.model_name.human)[:create] }
+        format.html { redirect_to book_url(@book), notice: Book.model_name.human.capitalize + t('success.create') }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to book_url(@book), notice: success(Book.model_name.human)[:update] }
+        format.html { redirect_to book_url(@book), notice: Book.model_name.human.capitalize + t('success.update') }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class BooksController < ApplicationController
     @book.destroy
 
     respond_to do |format|
-      format.html { redirect_to books_url, notice: success(Book.model_name.human)[:destroy] }
+      format.html { redirect_to books_url, notice: Book.model_name.human.capitalize + t('success.destroy') }
       format.json { head :no_content }
     end
   end

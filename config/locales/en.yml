@@ -1,12 +1,7 @@
 en:
   activerecord:
-    notice:
-      success:
-        create: "%{model} was successfully created."
-        update: "%{model} was successfully updated."
-        destroy: "%{model} was successfully destroyed."
     models:
-      book: "Book"
+      book: "book"
     attributes:
       book:
         title: "Title"
@@ -16,21 +11,20 @@ en:
 
   layouts:
     application:
-      books_app: "BooksApp"
+      models_app: "model_namesApp"
 
-  books:
-    index:
-      books_all: "Books"
-      new_book: "New Book"
-      show_this_book: "Show this book"
-    show:
-      edit_this_book: "Edit this book"
-      back_to_books: "Back to books"
-      destroy_this_book: "Destroy this book"
-    new:
-      headline: "New Book"
-      back_to_books: "Back to books"
-    edit:
-      headline: "Editing Book"
-      show_this_book: "Show this book"
-      back_to_books: "Back to books"
+  headline:
+    index: "model_names"
+    new: "New model_name"
+    edit: "Editing model_name"
+
+  new_model: "New model_name"
+  show_this_model: "Show this model_name"
+  edit_this_model: "Edit this model_name"
+  destroy_this_model: "Destroy this model_name"
+  back_to_models: "Back to model_names"
+
+  success:
+    create: " was successfully created."
+    update: " was successfully updated."
+    destroy: " was successfully destroyed."
