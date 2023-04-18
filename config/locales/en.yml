@@ -1,7 +1,7 @@
 en:
   activerecord:
     models:
-      book: "book"
+      book: "Book"
     attributes:
       book:
         title: "Title"
@@ -11,20 +11,20 @@ en:
 
   layouts:
     application:
-      models_app: "model_namesApp"
+      models_app: "%{model_name}sApp"
 
   headline:
-    index: "model_names"
-    new: "New model_name"
-    edit: "Editing model_name"
+    index: "%{model_name}s"
+    new: "New %{model_name}"
+    edit: "Editing %{model_name}"
 
-  new_model: "New model_name"
-  show_this_model: "Show this model_name"
-  edit_this_model: "Edit this model_name"
-  destroy_this_model: "Destroy this model_name"
-  back_to_models: "Back to model_names"
+  new_model: "New %{model_name}"
+  show_this_model: "Show this %{model_name}"
+  edit_this_model: "Edit this %{model_name}"
+  destroy_this_model: "Destroy this %{model_name}"
+  back_to_models: "Back to %{model_name}s"
 
   success:
-    create: " was successfully created."
-    update: " was successfully updated."
-    destroy: " was successfully destroyed."
+    create: "%{model_name} was successfully created."
+    update: "%{model_name} was successfully updated."
+    destroy: "%{model_name} was successfully destroyed."

@@ -1,18 +1,18 @@
 <p style="color: green"><%= notice %></p>
 
-<h1><%= t('headline.index').sub(/model_name/,Book.model_name.human.capitalize) %></h1>
+<h1><%= t 'headline.index', deep_interpolation: true, model_name: Book.model_name.human %></h1>
 
 <div id="books" class="index-items">
   <% @books.each do |book| %>
   <div class="index-item">
     <%= render book %>
     <p>
-      <%= link_to (t :show_this_model).sub(/model_name/,Book.model_name.human), book %>
+      <%= link_to (t :show_this_model, deep_interpolation: true, model_name: Book.model_name.human.downcase), book %>
     </p>
   </div>
   <% end %>
 </div>
 
 <nav class="page-nav">
-  <%= link_to (t :new_model).sub(/model_name/,Book.model_name.human), new_book_path %>
+  <%= link_to (t :new_model, deep_interpolation: true, model_name: Book.model_name.human), new_book_path %>
 </nav>

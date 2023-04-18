@@ -1,9 +1,9 @@
-<h1><%= t('headline.new').sub(/model_name/,Book.model_name.human.capitalize) %></h1>
+<h1><%= t 'headline.new', deep_interpolation: true, model_name: Book.model_name.human %></h1>
 
 <%= render "form", book: @book %>
 
 <br>
 
 <nav class="page-nav">
-  <%= link_to (t :back_to_models).sub(/model_name/,Book.model_name.human), books_path %>
+  <%= link_to (t :back_to_models, deep_interpolation: true, model_name: Book.model_name.human.downcase), books_path %>
 </nav>

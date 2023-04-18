@@ -16,20 +16,20 @@ ja:
 
   layouts:
     application:
-      models_app: "model_nameアプリ"
+      models_app: "%{model_name}アプリ"
 
   headline:
-    index: "model_name一覧"
+    index: "%{model_name}一覧"
     new: "新規作成画面"
     edit: "編集画面"
 
   new_model: "新規作成する"
-  show_this_model: "このmodel_nameを見る"
-  edit_this_model: "このmodel_nameを編集する"
-  destroy_this_model: "このmodel_nameを削除する"
-  back_to_models: "model_name一覧へ戻る"
+  show_this_model: "この%{model_name}を見る"
+  edit_this_model: "この%{model_name}を編集する"
+  destroy_this_model: "この%{model_name}を削除する"
+  back_to_models: "%{model_name}一覧へ戻る"
 
   success:
-    create: "を新規登録しました。"
-    update: "を更新しました。"
-    destroy: "を削除しました。"
+    create: "%{model_name}を新規登録しました。"
+    update: "%{model_name}を更新しました。"
+    destroy: "%{model_name}を削除しました。"
