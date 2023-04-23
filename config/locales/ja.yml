@@ -1,0 +1,35 @@
+ja:
+  activerecord:
+    models:
+      book: "書籍"
+    attributes:
+      book:
+        title: "書籍名"
+        memo: "内容"
+        author: "著者"
+        picture: "画像"
+
+  helpers:
+    submit:
+      create: "新規作成"
+      update: "更新"
+
+  layouts:
+    application:
+      models_app: "%{model_name}アプリ"
+
+  headline:
+    index: "%{model_name}一覧"
+    new: "新規作成画面"
+    edit: "編集画面"
+
+  new_model: "新規作成する"
+  show_this_model: "この%{model_name}を見る"
+  edit_this_model: "この%{model_name}を編集する"
+  destroy_this_model: "この%{model_name}を削除する"
+  back_to_models: "%{model_name}一覧へ戻る"
+
+  success:
+    create: "%{model_name}を新規登録しました。"
+    update: "%{model_name}を更新しました。"
+    destroy: "%{model_name}を削除しました。"
