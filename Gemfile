@@ -79,3 +79,7 @@ group :test do
 end
 
 gem 'carrierwave'
+
+gem 'kaminari'
+
+gem 'bootstrap5-kaminari-views'

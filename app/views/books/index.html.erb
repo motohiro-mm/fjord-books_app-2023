@@ -7,12 +7,13 @@
     <div class="index-item">
       <%= render book %>
       <p>
-        <%= link_to t('views.common.show', name: Book.model_name.human.downcase), book %>
+        <%= link_to t('views.common.show', name: Book.model_name.human.downcase), book_path(book, current_page: @books.current_page) %>
       </p>
     </div>
   <% end %>
 </div>
 
 <nav class="page-nav">
+  <%= paginate @books, theme: 'bootstrap-5' %>
   <%= link_to t('views.common.new', name: Book.model_name.human.downcase), new_book_path %>
 </nav>
