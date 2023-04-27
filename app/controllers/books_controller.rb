@@ -9,9 +9,7 @@ class BooksController < ApplicationController
   end
 
   # GET /books/1 or /books/1.json
-  def show
-    @current_page = params[:current_page]
-  end
+  def show; end
 
   # GET /books/new
   def new
