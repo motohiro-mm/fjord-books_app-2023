@@ -17,5 +17,7 @@
 
 <nav class="page-nav">
     <%= link_to t('views.common.new', name: Book.model_name.human.downcase), new_book_path %>
+    <%= link_to t('views.common.title_index', name: User.model_name.human.downcase), users_path %>
+    <%= link_to t('views.common.edit', name: User.model_name.human.downcase), edit_user_registration_path %>
     <%= button_to("Log Out", destroy_user_session_path, method: :delete) %>
 </nav>
