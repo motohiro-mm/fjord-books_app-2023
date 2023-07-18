@@ -2,7 +2,6 @@ en:
   activerecord:
     models:
       book: Book
-      user: User
 
     attributes:
       book:

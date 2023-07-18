@@ -2,7 +2,6 @@ ja:
   activerecord:
     models:
       book: 本
-      user: ユーザー
 
     attributes:
       book:
