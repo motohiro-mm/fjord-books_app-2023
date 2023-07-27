@@ -81,6 +81,7 @@ end
 
 gem 'carrierwave'
 gem 'kaminari'
+
 gem 'devise'
 
 group :development do
