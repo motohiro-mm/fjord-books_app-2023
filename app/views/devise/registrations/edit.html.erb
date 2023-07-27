@@ -32,7 +32,7 @@
 
   <div class="field">
     <%= f.label :password %><i> (<%= t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it') %>)</i><br />
-    <%= f.password_field :password%>
+    <%= f.password_field :password %>
     <% if @minimum_password_length %>
     <%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %>
     <% end %><br />
@@ -40,7 +40,7 @@
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation%>
+    <%= f.password_field :password_confirmation %>
   </div>
 
   <div class="field">
