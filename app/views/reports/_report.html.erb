@@ -1,11 +1,11 @@
 <div id="<%= dom_id report %>">
   <p>
-    <strong>Title:</strong>
+    <strong><%= Report.human_attribute_name(:title) %>:</strong>
     <%= report.title %>
   </p>
 
   <p>
-    <strong>Body:</strong>
+    <strong><%= Report.human_attribute_name(:body) %>:</strong>
     <%= report.body %>
   </p>
 
