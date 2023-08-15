@@ -1,9 +1,10 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[ show edit update destroy ]
+  before_action :back_to_index_unless_same_user, only: %i[ edit update destroy ]
 
   # GET /reports or /reports.json
   def index
-    @reports = Report.all.page(params[:page])
+    @reports = Report.preload(:user).order(:id).page(params[:page])
   end
 
   # GET /reports/1 or /reports/1.json
@@ -46,7 +47,6 @@ class ReportsController < ApplicationController
   # DELETE /reports/1 or /reports/1.json
   def destroy
     @report.destroy
-
     respond_to do |format|
       format.html { redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human) }
     end
@@ -60,6 +60,12 @@ class ReportsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def report_params
-      params.require(:report).permit(:title, :body)
+      params.require(:report).permit(:title, :body).merge(user_id: current_user.id)
+    end
+
+    def back_to_index_unless_same_user
+      unless @report.user == current_user
+        redirect_to reports_url, alert: t('views.common.error')
+      end
     end
 end
