@@ -1,7 +1,11 @@
 <div id="<%= dom_id report %>">
   <p>
     <strong><%= User.human_attribute_name(:name) %>:</strong>
-    <%= report.user.name %>
+    <% if report.user.name.eql?("") %>
+      <%=  report.user.email %>
+    <% else %>
+      <%= report.user.name %>
+    <% end %>
   </p>
 
   <p>
