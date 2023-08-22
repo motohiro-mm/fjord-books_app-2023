@@ -2,6 +2,8 @@
 
 <div class="show-item">
   <%= render @report %>
+  <br>
+  <%= render "reports/comments/comments", commentable: @report %>
 </div>
 
 <nav class="page-nav">

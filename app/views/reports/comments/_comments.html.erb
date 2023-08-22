@@ -1,0 +1,40 @@
+<% if @comments == [] %>
+  <%= t('views.common.not_title', name: Comment.model_name.human) %>
+<% else %>
+  <div id="comments" class="show-items">
+    <% @comments.each do |comment| %>
+      <div class="show-item">
+        <p>
+          <strong><%= User.human_attribute_name(:name) %>:</strong>
+          <%= current_user_name(comment.user) %>
+        </p>
+
+        <p>
+          <strong><%= Comment.human_attribute_name(:created_at) %>:</strong>
+          <%= l comment.created_at, format: :default %>
+        </p>
+
+        <p>
+          <strong><%= Comment.human_attribute_name(:content) %>:</strong>
+          <%= comment.content %>
+        </p>
+
+        <nav class="page-nav">
+          <% if comment.user == current_user %>
+            <%= link_to t('views.common.edit', name: Comment.model_name.human), edit_polymorphic_path([commentable, comment]) %>|
+            <%= link_to t('views.common.destroy', name: Comment.model_name.human), [commentable, comment], data: { turbo_method: :delete } %>
+          <% end %>
+        </nav>
+        </div>
+      <br>
+    <% end %>
+  </div>
+<% end %>
+
+<br>
+
+<div>
+  <h2><%= t('views.common.title_new', name: Comment.model_name.human.downcase) %></h2>
+
+  <%= render 'reports/comments/form', commentable: @commentable, comment: Comment.new %>
+</div>
