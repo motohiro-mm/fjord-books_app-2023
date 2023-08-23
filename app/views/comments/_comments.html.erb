@@ -36,5 +36,5 @@
 <div>
   <h2><%= t('views.common.title_new', name: Comment.model_name.human.downcase) %></h2>
 
-  <%= render 'books/comments/form', commentable: @commentable, comment: Comment.new %>
+  <%= render 'comments/form', commentable: @commentable, comment: Comment.new %>
 </div>
