@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
-  before_action :set_report, only: %i[ show edit update destroy ]
-  before_action :back_to_index_unless_same_user, only: %i[ edit update destroy ]
+  before_action :set_report, only: %i[show edit update destroy]
+  before_action :back_to_index_unless_same_user, only: %i[edit update destroy]
 
   # GET /reports or /reports.json
   def index
@@ -48,19 +50,18 @@ class ReportsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_report
-      @report = Report.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def report_params
-      params.require(:report).permit(:title, :body).merge(user_id: current_user.id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_report
+    @report = Report.find(params[:id])
+  end
 
-    def back_to_index_unless_same_user
-      unless @report.user == current_user
-        redirect_to reports_url, alert: t('views.common.error')
-      end
-    end
+  # Only allow a list of trusted parameters through.
+  def report_params
+    params.require(:report).permit(:title, :body).merge(user_id: current_user.id)
+  end
+
+  def back_to_index_unless_same_user
+    redirect_to reports_url, alert: t('views.common.error') unless @report.user == current_user
+  end
 end

@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 class Reports::CommentsController < ApplicationController
   before_action :set_commentable, only: %i[create update edit destroy]
   before_action :set_comment, only: %i[edit update destroy]
-  
+
   def edit; end
 
   def create
     @comment = @commentable.comments.new(comment_params)
-    @comment.user_id = current_user.id
     if @comment.save
       redirect_to url_for(@commentable), notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
-      render "reports/show", status: :unprocessable_entity
+      render 'reports/show', status: :unprocessable_entity
     end
   end
 
@@ -38,6 +39,6 @@ class Reports::CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content).merge(user_id: current_user.id)
   end
 end
