@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class Books::CommentsController < CommentsController
-  before_action :set_commentable
+class Books::CommentsController < ApplicationController
+  include CommonCommentable
 
   private
 
