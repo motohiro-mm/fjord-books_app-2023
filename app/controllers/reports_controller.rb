@@ -4,12 +4,12 @@ class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
   before_action :back_to_index_unless_same_user, only: %i[edit update destroy]
 
-  # GET /reports or /reports.json
+  # GET /reports
   def index
     @reports = Report.preload(:user).order(:id).page(params[:page])
   end
 
-  # GET /reports/1 or /reports/1.json
+  # GET /reports/1
   def show
     @commentable = @report
     @comments = @report.comments
@@ -43,7 +43,7 @@ class ReportsController < ApplicationController
     end
   end
 
-  # DELETE /reports/1 or /reports/1.json
+  # DELETE /reports/1
   def destroy
     @report.destroy
     redirect_to reports_url, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
