@@ -26,7 +26,9 @@ class ReportsController < ApplicationController
   # POST /reports
   def create
     @report = Report.new(report_params)
-
+    p @report
+    @report.user_id = current_user.id
+    p @report
     if @report.save
       redirect_to report_url(@report), notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
@@ -58,7 +60,7 @@ class ReportsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def report_params
-    params.require(:report).permit(:title, :body).merge(user_id: current_user.id)
+    params.require(:report).permit(:title, :body)
   end
 
   def back_to_index_unless_same_user

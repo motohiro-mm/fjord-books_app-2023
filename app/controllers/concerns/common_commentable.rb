@@ -14,6 +14,7 @@ module CommonCommentable
 
   def create
     @comment = @commentable.comments.new(comment_params)
+    @comment.user_id = current_user.id
     if @comment.save
       redirect_to url_for(@commentable), notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
@@ -22,6 +23,7 @@ module CommonCommentable
   end
 
   def update
+    puts @comment
     if @comment.update(comment_params)
       redirect_to url_for(@commentable), notice: t('controllers.common.notice_update', name: Comment.model_name.human)
     else
@@ -42,6 +44,6 @@ module CommonCommentable
   end
 
   def comment_params
-    params.require(:comment).permit(:content).merge(user_id: current_user.id)
+    params.require(:comment).permit(:content)
   end
 end
