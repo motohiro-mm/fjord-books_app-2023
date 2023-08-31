@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
   # GET /reports/1
   def show
     @commentable = @report
-    @comments = @report.comments
+    @comments = @report.comments.order(:id)
   end
 
   # GET /reports/new
