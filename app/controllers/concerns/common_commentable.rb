@@ -5,7 +5,7 @@ module CommonCommentable
 
   included do
     before_action :set_commentable
-    before_action :set_comment, only: %i[edit update destroy]
+    before_action :set_comment_and_comment_user_check, only: %i[edit update destroy]
   end  
 
   def edit
@@ -36,8 +36,9 @@ module CommonCommentable
 
   private
 
-  def set_comment
+  def set_comment_and_comment_user_check
     @comment = Comment.find(params[:id])
+    redirect_to url_for(@commentable), alert: t('views.common.error') unless @comment.user == current_user
   end
 
   def comment_params
