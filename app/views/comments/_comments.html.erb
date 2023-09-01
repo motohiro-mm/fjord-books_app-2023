@@ -1,8 +1,8 @@
-<% if @comments == [] %>
+<% if comments == [] %>
   <%= t('views.common.not_title', name: Comment.model_name.human) %>
 <% else %>
   <div id='comments' class='show-items'>
-    <% @comments.each do |comment| %>
+    <% comments.each do |comment| %>
       <div class='show-item'>
         <p>
           <strong><%= User.human_attribute_name(:name) %>:</strong>
@@ -36,5 +36,5 @@
 <div>
   <h2><%= t('views.common.title_new', name: Comment.model_name.human.downcase) %></h2>
 
-  <%= render 'comments/form', commentable: @commentable, comment: Comment.new %>
+  <%= render 'comments/form', commentable: @commentable, comment: @comment.nil? ? Comment.new : @comment %>
 </div>

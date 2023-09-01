@@ -24,7 +24,6 @@ module CommonCommentable
   end
 
   def update
-    puts @comment
     if @comment.update(comment_params)
       redirect_to url_for(@commentable), notice: t('controllers.common.notice_update', name: Comment.model_name.human)
     else
