@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    render plain: '404 Not Found', status: 404
+    render plain: '404 Not Found', status: :not_found
   end
 
   def check_authorization(report_or_comment)

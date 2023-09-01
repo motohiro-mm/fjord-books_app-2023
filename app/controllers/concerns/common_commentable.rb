@@ -6,8 +6,8 @@ module CommonCommentable
   included do
     before_action :set_commentable
     before_action :set_comment, only: %i[edit update destroy]
-    before_action ->{ check_authorization(@comment) }, only: %i[edit update destroy]
-  end  
+    before_action -> { check_authorization(@comment) }, only: %i[edit update destroy]
+  end
 
   def edit
     render 'comments/edit'
