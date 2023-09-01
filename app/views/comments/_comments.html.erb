@@ -1,5 +1,5 @@
 <% if comments == [] %>
-  <%= t('views.common.not_title', name: Comment.model_name.human) %>
+  <%= t('views.common.no_title', name: Comment.model_name.human) %>
 <% else %>
   <div id='comments' class='show-items'>
     <% comments.each do |comment| %>
