@@ -38,11 +38,9 @@ module CommonCommentable
   private
 
   def set_comment
-    begin
-      @comment = Comment.where("user_id = ?", current_user.id).find(params[:id])
-    rescue
-      render plain: '404 Not Found', status: :not_found
-    end
+    @comment = Comment.where('user_id = ?', current_user.id).find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render plain: '404 Not Found', status: :not_found
   end
 
   def comment_params
