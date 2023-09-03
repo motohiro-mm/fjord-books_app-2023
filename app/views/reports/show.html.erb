@@ -1,12 +1,12 @@
 <h1><%= t('views.common.title_show', name: Report.model_name.human) %></h1>
 
-<div class='show-item'>
+<div class="show-item">
   <%= render 'reports/report', report: @report %>
   <br>
   <%= render 'comments/comments', commentable: @report, comments: @comments %>
 </div>
 
-<nav class='page-nav'>
+<nav class="page-nav">
   <% if @report.user == current_user %>
     <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) %> |
   <% end %>
