@@ -6,7 +6,6 @@ module CommonCommentable
   included do
     before_action :set_commentable
     before_action :set_comment, only: %i[edit update destroy]
-    before_action -> { check_authorization(@comment) }, only: %i[edit update destroy]
   end
 
   def edit
@@ -39,7 +38,11 @@ module CommonCommentable
   private
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    begin
+      @comment = Comment.where("user_id = ?", current_user.id).find(params[:id])
+    rescue
+      render plain: '404 Not Found', status: :not_found
+    end
   end
 
   def comment_params
