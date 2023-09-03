@@ -1,4 +1,4 @@
-<% if comments == [] %>
+<% if comments.blank? %>
   <%= t('views.common.no_title', name: Comment.model_name.human) %>
 <% else %>
   <div id="comments" class="show-items">
