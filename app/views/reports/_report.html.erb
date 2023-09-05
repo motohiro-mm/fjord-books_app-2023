@@ -1,6 +1,6 @@
 <div id="<%= dom_id report %>">
   <p>
-    <strong><%= User.human_attribute_name(:name) %>:</strong>
+    <strong><%= User.model_name.human %>:</strong>
     <%= current_user_name(report.user) %>
   </p>
 
