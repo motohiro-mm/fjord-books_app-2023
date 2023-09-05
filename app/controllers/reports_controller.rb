@@ -54,8 +54,6 @@ class ReportsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_report
     @report = Report.where('user_id = ?', current_user.id).find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    render plain: '404 Not Found', status: :not_found
   end
 
   # Only allow a list of trusted parameters through.
