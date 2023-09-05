@@ -26,7 +26,7 @@ module CommonCommentable
     if @comment.update(comment_params)
       redirect_to url_for(@commentable), notice: t('controllers.common.notice_update', name: Comment.model_name.human)
     else
-      render :edit, status: :unprocessable_entity
+      render 'comments/edit', status: :unprocessable_entity
     end
   end
 
