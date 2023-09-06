@@ -38,7 +38,7 @@ module CommonCommentable
   private
 
   def set_comment
-    @comment = Comment.where('user_id = ?', current_user.id).find(params[:id])
+    @comment = current_user.comments.find(params[:id])
   end
 
   def comment_params

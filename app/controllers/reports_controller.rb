@@ -25,8 +25,7 @@ class ReportsController < ApplicationController
 
   # POST /reports
   def create
-    @report = Report.new(report_params)
-    @report.user = current_user
+    @report = current_user.reports.new(report_params)
     if @report.save
       redirect_to report_url(@report), notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
@@ -53,7 +52,7 @@ class ReportsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_report
-    @report = Report.where('user_id = ?', current_user.id).find(params[:id])
+    @report = current_user.reports.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
