@@ -1,7 +1,9 @@
 <h1><%= t('views.common.title_show', name: Book.model_name.human) %></h1>
 
 <div class="show-item">
-  <%= render @book %>
+  <%= render 'books/book' , book: @book %>
+  <br>
+  <%= render 'comments/comments', commentable: @book, comments: @comments, comment: @comment.nil? ? Comment.new : @comment %>
 </div>
 
 <nav class="page-nav">
