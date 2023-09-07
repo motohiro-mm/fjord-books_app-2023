@@ -13,7 +13,6 @@ module CommonCommentable
   end
 
   def create
-    p comment_params
     @comment = @commentable.comments.new(comment_params.merge(user: current_user))
     if @comment.save
       redirect_to url_for(@commentable), notice: t('controllers.common.notice_create', name: Comment.model_name.human)
