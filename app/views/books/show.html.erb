@@ -3,7 +3,7 @@
 <div class="show-item">
   <%= render 'books/book' , book: @book %>
   <br>
-  <%= render 'comments/comments', commentable: @book, comments: @comments %>
+  <%= render 'comments/comments', commentable: @book, comments: @comments, comment: @comment.nil? ? Comment.new : @comment %>
 </div>
 
 <nav class="page-nav">
