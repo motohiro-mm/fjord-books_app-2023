@@ -2,6 +2,19 @@
 
 <div class="show-item">
   <%= render @report %>
+
+  <br>
+
+  <% if @report.mentioned_reports.empty? %>
+    <%= "言及した日報はありません" %>
+  <% else %>
+    <%= "この日報は以下の日報から言及されています" %>
+    <% @report.mentioned_reports.each do |t| %>
+      <%= t.user.name %> : 
+      <%= t.title %> から言及
+      <%= t.created_at %>
+    <% end %>
+  <% end %>
 </div>
 
 <%= render 'shared/comments', commentable: @report %>
