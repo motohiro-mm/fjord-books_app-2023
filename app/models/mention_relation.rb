@@ -1,0 +1,2 @@
+class MentionRelation < ApplicationRecord
+end
