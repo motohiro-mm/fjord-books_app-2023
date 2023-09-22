@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Report < ApplicationRecord
-  after_create :mention_create
-  after_update :mention_update
+  after_create :create_mention
+  after_update :update_mention
 
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
@@ -23,27 +23,38 @@ class Report < ApplicationRecord
     created_at.to_date
   end
 
-  def mention_create
-    mentioned_report_ids = self.content.scan(%r!http://localhost:3000/reports/(\d+)!).flatten.uniq
+  def create_mention
     mentioning_relations = 
-    mentioned_report_ids.map do |m_r_id|
-      self.mentioning_relations.build(mentioned_report_id: m_r_id)
+    ids_in_content(self).map do |id|
+      self.mentioning_relations.build(mentioned_report_id: id)
     end
     mentioning_relations.each(&:save)
   end
 
-  def mention_update
+  def update_mention
     report_mentioning_relations = self.mentioning_relations
-    old_mentioned_reports_ids = self.mentioning_reports.map {|m_r| m_r.id }
-    new_mentioned_report_ids = self.content.scan(%r!http://localhost:3000/reports/(\d+)!).flatten.uniq.map(&:to_i)
+    old_mentioned_reports_ids = self.mentioning_reports.map(&:id)
+    new_mentioned_report_ids = ids_in_content(self).map(&:to_i)
+
     add_mentioned_report_ids = new_mentioned_report_ids - old_mentioned_reports_ids
-    add_mentioned_report_ids.each do |add_mentioned_report_id|
-      report_mentioning_relations.create(mentioned_report_id: add_mentioned_report_id)
-    end
+    add_mentioning_relations(add_mentioned_report_ids, report_mentioning_relations)
+
     delete_mentioned_report_ids = old_mentioned_reports_ids - new_mentioned_report_ids
+    delete_mentioning_relations(delete_mentioned_report_ids, report_mentioning_relations)
+  end
+
+  def ids_in_content(report)
+    report.content.scan(%r!http://localhost:3000/reports/(\d+)!).flatten.uniq
+  end
+
+  def add_mentioning_relations(add_mentioned_report_ids, mentioning_relations)
+    add_mentioned_report_ids.each { |add_mentioned_report_id| mentioning_relations.create(mentioned_report_id: add_mentioned_report_id) }
+  end
+
+  def delete_mentioning_relations(delete_mentioned_report_ids, mentioning_relations)
     delete_mentioned_report_ids.each do |delete_mentioned_report_id|
-      delete_relation = report_mentioning_relations.find_by(mentioned_report_id: delete_mentioned_report_id)
-      delete_relation.destroy
+      delete_mentioning_relation = mentioning_relations.find_by(mentioned_report_id: delete_mentioned_report_id)
+      delete_mentioning_relation.destroy
     end
   end
 end
