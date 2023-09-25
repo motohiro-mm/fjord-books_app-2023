@@ -24,11 +24,11 @@ class Report < ApplicationRecord
   end
 
   def create_mention
-    mentioning_relations = 
+    report_mentioning_relations = 
     ids_in_content(self).map do |id|
       self.mentioning_relations.build(mentioned_report_id: id)
     end
-    mentioning_relations.each(&:save)
+    report_mentioning_relations.each(&:save)
   end
 
   def update_mention
@@ -47,13 +47,13 @@ class Report < ApplicationRecord
     report.content.scan(%r!http://localhost:3000/reports/(\d+)!).flatten.uniq
   end
 
-  def add_mentioning_relations(add_mentioned_report_ids, mentioning_relations)
-    add_mentioned_report_ids.each { |add_mentioned_report_id| mentioning_relations.create(mentioned_report_id: add_mentioned_report_id) }
+  def add_mentioning_relations(add_mentioned_report_ids, report_mentioning_relations)
+    add_mentioned_report_ids.each { |add_mentioned_report_id| report_mentioning_relations.create(mentioned_report_id: add_mentioned_report_id) }
   end
 
-  def delete_mentioning_relations(delete_mentioned_report_ids, mentioning_relations)
+  def delete_mentioning_relations(delete_mentioned_report_ids, report_mentioning_relations)
     delete_mentioned_report_ids.each do |delete_mentioned_report_id|
-      delete_mentioning_relation = mentioning_relations.find_by(mentioned_report_id: delete_mentioned_report_id)
+      delete_mentioning_relation = report_mentioning_relations.find_by(mentioned_report_id: delete_mentioned_report_id)
       delete_mentioning_relation.destroy
     end
   end

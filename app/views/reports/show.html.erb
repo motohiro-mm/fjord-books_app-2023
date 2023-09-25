@@ -6,13 +6,14 @@
   <br>
 
   <% if @report.mentioned_reports.empty? %>
-    <%= "言及した日報はありません" %>
+    <%= t('views.mention_relation.no_mention_relations', name: Report.model_name.human) %>
   <% else %>
-    <%= "この日報は以下の日報から言及されています" %>
+    <%= t('views.mention_relation.mention_relations', name: Report.model_name.human) %><br>
     <% @report.mentioned_reports.each do |t| %>
       <%= t.user.name %> : 
-      <%= t.title %> から言及
-      <%= t.created_at %>
+      <%= t.title %>
+      <%= t('views.mention_relation.mention_from') %>
+      <%= t('views.mention_relation.from_times_ago', time: time_ago_in_words(t.created_at)) %><br>
     <% end %>
   <% end %>
 </div>
