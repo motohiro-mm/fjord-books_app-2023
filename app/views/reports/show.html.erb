@@ -10,8 +10,7 @@
   <% else %>
     <%= t('views.mention_relation.mention_relations', name: Report.model_name.human) %><br>
     <% @report.mentioned_reports.each do |t| %>
-      <%= t.user.name %> : 
-      <%= t.title %>
+      <%= t.user.name %> : <%= t.title %>
       <%= t('views.mention_relation.mention_from') %>
       <%= t('views.mention_relation.from_times_ago', time: time_ago_in_words(t.created_at)) %><br>
     <% end %>
