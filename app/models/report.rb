@@ -32,8 +32,8 @@ class Report < ApplicationRecord
   end
 
   def update_mention
-    old_mentioned_reports_ids = mentioning_reports.map(&:id)
-    new_mentioned_report_ids = ids_in_content(self).map(&:to_i)
+    old_mentioned_reports_ids = mentioning_reports.ids
+    new_mentioned_report_ids = ids_in_content(self)
 
     add_mentioned_report_ids = new_mentioned_report_ids - old_mentioned_reports_ids
     add_mentionings(add_mentioned_report_ids, mentionings)
@@ -43,7 +43,7 @@ class Report < ApplicationRecord
   end
 
   def ids_in_content(report)
-    report.content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.uniq
+    report.content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.uniq.map(&:to_i)
   end
 
   def add_mentionings(add_mentioned_report_ids, report_mentionings)
