@@ -35,25 +35,25 @@ class Report < ApplicationRecord
     old_mentioned_reports_ids = mentioning_reports.ids
     new_mentioned_report_ids = ids_in_content(self)
 
-    add_mentioned_report_ids = new_mentioned_report_ids - old_mentioned_reports_ids
-    add_mentionings(add_mentioned_report_ids, mentionings)
+    additional_mentioned_report_ids = new_mentioned_report_ids - old_mentioned_reports_ids
+    add_mentionings(additional_mentioned_report_ids, mentionings)
 
-    delete_mentioned_report_ids = old_mentioned_reports_ids - new_mentioned_report_ids
-    delete_mentionings(delete_mentioned_report_ids, mentionings)
+    unnecessary_mentioned_report_ids = old_mentioned_reports_ids - new_mentioned_report_ids
+    delete_mentionings(unnecessary_mentioned_report_ids, mentionings)
   end
 
   def ids_in_content(report)
     report.content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.uniq.map(&:to_i)
   end
 
-  def add_mentionings(add_mentioned_report_ids, report_mentionings)
-    add_mentioned_report_ids.each { |add_mentioned_report_id| report_mentionings.create(mentioned_report_id: add_mentioned_report_id) }
+  def add_mentionings(additional_mentioned_report_ids, report_mentionings)
+    additional_mentioned_report_ids.each { |additional_mentioned_report_id| report_mentionings.create(mentioned_report_id: additional_mentioned_report_id) }
   end
 
-  def delete_mentionings(delete_mentioned_report_ids, report_mentionings)
-    delete_mentioned_report_ids.each do |delete_mentioned_report_id|
-      delete_mentioning = report_mentionings.find_by(mentioned_report_id: delete_mentioned_report_id)
-      delete_mentioning.destroy
+  def delete_mentionings(unnecessary_mentioned_report_ids, report_mentionings)
+    unnecessary_mentioned_report_ids.each do |unnecessary_mentioned_report_id|
+      unnecesary_mentioning = report_mentionings.find_by(mentioned_report_id: unnecessary_mentioned_report_id)
+      unnecesary_mentioning.destroy
     end
   end
 end
