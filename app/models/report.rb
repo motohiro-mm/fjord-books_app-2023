@@ -56,8 +56,3 @@ class Report < ApplicationRecord
     mentionings.where(mentioned_report_id: unnecessary_mentioned_report_ids).destroy_all
   end
 end
-
-def convert_url_in_content(content)
-  uri_reg = URI::DEFAULT_PARSER.make_regexp(%w[http https])
-  content.gsub(uri_reg) { %(<a href='#{Regexp.last_match(0)}'>#{Regexp.last_match(0)}</a>) }
-end

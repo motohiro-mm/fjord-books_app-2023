@@ -10,7 +10,7 @@
   <% else %>
     <%= t('views.mention_relation.mention_relations', name: Report.model_name.human) %><br>
     <% @report.mentioned_reports.order(:id).each do |t| %>
-      <%= t.user.name %> : <%= t.title %>
+      <%= t.user.name %> : <%= link_to t.title, "http://localhost:3000/reports/#{t.id}" %>
       <%= t('views.mention_relation.mention_from') %>
       <%= t('views.mention_relation.from_times_ago', time: time_ago_in_words(t.created_at)) %><br>
     <% end %>
