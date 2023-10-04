@@ -6,7 +6,7 @@
 
   <p>
     <strong><%= Report.human_attribute_name(:content) %>:</strong>
-    <%= format_content report.content %>
+    <%= sanitize simple_format(convert_url_in_content(report.content)), tags: %w(a br) %>
   </p>
 
   <p>
