@@ -24,11 +24,10 @@ class Report < ApplicationRecord
   end
 
   def create_mention
-    report_mentionings =
-      ids_in_content(self).map do |id|
-        mentionings.build(mentioned_report_id: id)
-      end
-    report_mentionings.each(&:save)
+    ids_in_content(self).each do |id|
+      report_mentioning = mentionings.build(mentioned_report_id: id)
+      report_mentioning.save
+    end
   end
 
   def update_mention
