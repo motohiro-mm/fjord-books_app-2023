@@ -9,8 +9,8 @@ class Report < ApplicationRecord
 
   has_many :mentionings, foreign_key: 'mentioning_report_id', class_name: 'MentionRelation', inverse_of: :mentioning_report, dependent: :destroy
   has_many :mentioning_reports, through: :mentionings, source: :mentioned_report
-  has_many :mentioneds, foreign_key: 'mentioned_report_id', class_name: 'MentionRelation', inverse_of: :mentioned_report, dependent: :destroy
-  has_many :mentioned_reports, through: :mentioneds, source: :mentioning_report
+  has_many :mentioners, foreign_key: 'mentioned_report_id', class_name: 'MentionRelation', inverse_of: :mentioned_report, dependent: :destroy
+  has_many :mentioned_reports, through: :mentioners, source: :mentioning_report
 
   validates :title, presence: true
   validates :content, presence: true
