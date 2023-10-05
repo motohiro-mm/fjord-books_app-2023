@@ -26,7 +26,7 @@ class Report < ApplicationRecord
   def create_mention
     ids_in_content(self).each do |id|
       mentioning = mentionings.build(mentioned_report_id: id)
-      mentioning.save if mentioning.valid?
+      mentioning.save! if mentioning.valid?
     end
   end
 
@@ -48,7 +48,7 @@ class Report < ApplicationRecord
   def add_mentionings(additional_mentioned_report_ids)
     additional_mentioned_report_ids.each do |additional_mentioned_report_id|
       additional_mentioning = mentionings.build(mentioned_report_id: additional_mentioned_report_id)
-      additional_mentioning.save if additional_mentioning.valid?
+      additional_mentioning.save! if additional_mentioning.valid?
     end
   end
 
