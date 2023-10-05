@@ -9,10 +9,10 @@
     <%= t('views.mention_relation.no_mention_relations', name: Report.model_name.human) %>
   <% else %>
     <%= t('views.mention_relation.mention_relations', name: Report.model_name.human) %><br>
-    <% @report.mentioned_reports.order(:id).each do |t| %>
-      <%= t.user.name %> : <%= link_to t.title, "http://localhost:3000/reports/#{t.id}" %>
+    <% @report.mentioned_reports.order(:id).each do |mentioned_report| %>
+      <%= mentioned_report.user.name %> : <%= link_to mentioned_report.title, report_path(mentioned_report) %>
       <%= t('views.mention_relation.mention_from') %>
-      <%= t('views.mention_relation.from_times_ago', time: time_ago_in_words(t.created_at)) %><br>
+      <%= t('views.mention_relation.from_times_ago', time: time_ago_in_words(mentioned_report.created_at)) %><br>
     <% end %>
   <% end %>
 </div>
