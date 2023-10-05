@@ -37,8 +37,8 @@ class Report < ApplicationRecord
     additional_mentioned_report_ids = new_mentioned_report_ids - old_mentioned_reports_ids
     add_mentionings(additional_mentioned_report_ids)
 
-    unnecessary_mentioned_report_ids = old_mentioned_reports_ids - new_mentioned_report_ids
-    delete_mentionings(unnecessary_mentioned_report_ids)
+    deleted_mentioned_report_ids = old_mentioned_reports_ids - new_mentioned_report_ids
+    delete_mentionings(deleted_mentioned_report_ids)
   end
 
   def ids_in_content(report)
@@ -52,7 +52,7 @@ class Report < ApplicationRecord
     end
   end
 
-  def delete_mentionings(unnecessary_mentioned_report_ids)
-    mentionings.where(mentioned_report_id: unnecessary_mentioned_report_ids).destroy_all
+  def delete_mentionings(deleted_mentioned_report_ids)
+    mentionings.where(mentioned_report_id: deleted_mentioned_report_ids).destroy_all
   end
 end
