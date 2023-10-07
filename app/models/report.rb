@@ -7,9 +7,9 @@ class Report < ApplicationRecord
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
-  has_many :mentionings, foreign_key: 'mentioning_report_id', class_name: 'MentionRelation', inverse_of: :mentioning_report, dependent: :destroy
+  has_many :mentionings, foreign_key: 'mentioning_report_id', class_name: 'Mention', inverse_of: :mentioning_report, dependent: :destroy
   has_many :mentioning_reports, through: :mentionings, source: :mentioned_report
-  has_many :mentioners, foreign_key: 'mentioned_report_id', class_name: 'MentionRelation', inverse_of: :mentioned_report, dependent: :destroy
+  has_many :mentioners, foreign_key: 'mentioned_report_id', class_name: 'Mention', inverse_of: :mentioned_report, dependent: :destroy
   has_many :mentioned_reports, through: :mentioners, source: :mentioning_report
 
   validates :title, presence: true
@@ -24,10 +24,8 @@ class Report < ApplicationRecord
   end
 
   def create_mention
-    ids_in_content(self).each do |id|
-      mentioning = mentionings.build(mentioned_report_id: id)
-      mentioning.save! if mentioning.valid?
-    end
+    new_mentioned_report_ids = ids_in_content(self)
+    add_mentionings(new_mentioned_report_ids)
   end
 
   def update_mention

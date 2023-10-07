@@ -59,14 +59,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_032836) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "mention_relations", force: :cascade do |t|
+  create_table "mentions", force: :cascade do |t|
     t.integer "mentioning_report_id", null: false
     t.integer "mentioned_report_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mentioned_report_id"], name: "index_mention_relations_on_mentioned_report_id"
+    t.index ["mentioned_report_id"], name: "index_mentions_on_mentioned_report_id"
     t.index ["mentioning_report_id", "mentioned_report_id"], name: "mention_report_id", unique: true
-    t.index ["mentioning_report_id"], name: "index_mention_relations_on_mentioning_report_id"
+    t.index ["mentioning_report_id"], name: "index_mentions_on_mentioning_report_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -97,7 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_032836) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
-  add_foreign_key "mention_relations", "Reports", column: "mentioned_report_id"
-  add_foreign_key "mention_relations", "Reports", column: "mentioning_report_id"
+  add_foreign_key "mentions", "Reports", column: "mentioned_report_id"
+  add_foreign_key "mentions", "Reports", column: "mentioning_report_id"
   add_foreign_key "reports", "users"
 end

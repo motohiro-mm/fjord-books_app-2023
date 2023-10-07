@@ -202,9 +202,9 @@ ja:
       previous: '‹ 前'
       next: '次 ›'
       truncate: '…'
-    mention_relation:
-      no_mention_relations: "この%{name}に言及した%{name}はありません"
-      mention_relations: "この%{name}は以下の%{name}から言及されています"
+    mention:
+      no_mentions: "この%{name}に言及した%{name}はありません"
+      mentions: "この%{name}は以下の%{name}から言及されています"
       mention_from: 'からの言及'
       from_times_ago: "%{time}前より"
   controllers:
