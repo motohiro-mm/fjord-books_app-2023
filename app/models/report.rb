@@ -7,10 +7,10 @@ class Report < ApplicationRecord
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
 
-  has_many :mentionings, foreign_key: 'mentioning_report_id', class_name: 'Mention', inverse_of: :mentioning_report, dependent: :destroy
-  has_many :mentioning_reports, through: :mentionings, source: :mentioned_report
-  has_many :mentioners, foreign_key: 'mentioned_report_id', class_name: 'Mention', inverse_of: :mentioned_report, dependent: :destroy
-  has_many :mentioned_reports, through: :mentioners, source: :mentioning_report
+  has_many :sent_mentions, foreign_key: 'mentioning_report_id', class_name: 'Mention', inverse_of: :mentioning_report, dependent: :destroy
+  has_many :mentioning_reports, through: :sent_mentions, source: :mentioned_report
+  has_many :recieved_mentions, foreign_key: 'mentioned_report_id', class_name: 'Mention', inverse_of: :mentioned_report, dependent: :destroy
+  has_many :mentioned_reports, through: :recieved_mentions, source: :mentioning_report
 
   validates :title, presence: true
   validates :content, presence: true
@@ -45,12 +45,12 @@ class Report < ApplicationRecord
 
   def add_mentionings(additional_mentioned_report_ids)
     additional_mentioned_report_ids.each do |additional_mentioned_report_id|
-      additional_mentioning = mentionings.build(mentioned_report_id: additional_mentioned_report_id)
+      additional_mentioning = sent_mentions.build(mentioned_report_id: additional_mentioned_report_id)
       additional_mentioning.save! if additional_mentioning.valid?
     end
   end
 
   def delete_mentionings(deleted_mentioned_report_ids)
-    mentionings.where(mentioned_report_id: deleted_mentioned_report_ids).destroy_all
+    sent_mentions.where(mentioned_report_id: deleted_mentioned_report_ids).destroy_all
   end
 end
