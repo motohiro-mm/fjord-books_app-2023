@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Report < ApplicationRecord
-  after_create :create_mentions_linked_to_a_new_report
-  after_update :update_mentions_linked_to_a_updated_report
+  after_save :save_mentions
 
   belongs_to :user
   has_many :comments, as: :commentable, dependent: :destroy
@@ -25,34 +24,29 @@ class Report < ApplicationRecord
 
   private
 
-  def create_mentions_linked_to_a_new_report
-    new_mentioned_report_ids = ids_in_content(self)
-    add_sent_mentions(new_mentioned_report_ids)
-  end
-
-  def update_mentions_linked_to_a_updated_report
-    old_mentioned_reports_ids = mentioning_reports.ids
-    new_mentioned_report_ids = ids_in_content(self)
-
-    additional_mentioned_report_ids = new_mentioned_report_ids - old_mentioned_reports_ids
-    add_sent_mentions(additional_mentioned_report_ids)
-
-    deleted_mentioned_report_ids = old_mentioned_reports_ids - new_mentioned_report_ids
-    delete_sent_mentions(deleted_mentioned_report_ids)
+  def save_mentions
+    if sent_mentions.exists?
+      old_mentioned_reports_ids = mentioning_reports.ids
+      new_mentioned_report_ids = ids_in_content(self)
+      send_mentions(new_mentioned_report_ids - old_mentioned_reports_ids)
+      delete_mentions(old_mentioned_reports_ids - new_mentioned_report_ids)
+    else
+      send_mentions(ids_in_content(self))
+    end
   end
 
   def ids_in_content(report)
     report.content.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.uniq.map(&:to_i)
   end
 
-  def add_sent_mentions(report_ids)
+  def send_mentions(report_ids)
     report_ids.each do |report_id|
       additional_mentions = sent_mentions.build(mentioned_report_id: report_id)
       additional_mentions.save! if additional_mentions.valid?
     end
   end
 
-  def delete_sent_mentions(report_ids)
+  def delete_mentions(report_ids)
     sent_mentions.where(mentioned_report_id: report_ids).destroy_all
   end
 end
