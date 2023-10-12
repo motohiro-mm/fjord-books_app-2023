@@ -2,6 +2,19 @@
 
 <div class="show-item">
   <%= render @report %>
+
+  <br>
+
+  <% if @report.mentioned_reports.empty? %>
+    <%= t('views.mention.no_mentions', name: Report.model_name.human) %>
+  <% else %>
+    <%= t('views.mention.mentions', name: Report.model_name.human) %><br>
+    <% @report.mentioned_reports.order(:id).each do |mentioned_report| %>
+      <%= mentioned_report.user.name %> : <%= link_to mentioned_report.title, report_path(mentioned_report) %>
+      <%= t('views.mention.mention_from') %>
+      <%= t('views.mention.from_times_ago', time: time_ago_in_words(mentioned_report.created_at)) %><br>
+    <% end %>
+  <% end %>
 </div>
 
 <%= render 'shared/comments', commentable: @report %>

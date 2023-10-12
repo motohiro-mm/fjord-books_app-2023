@@ -202,6 +202,11 @@ ja:
       previous: '‹ 前'
       next: '次 ›'
       truncate: '…'
+    mention:
+      no_mentions: "この%{name}に言及した%{name}はありません"
+      mentions: "この%{name}は以下の%{name}から言及されています"
+      mention_from: 'からの言及'
+      from_times_ago: "%{time}前より"
   controllers:
     common:
       notice_create: "%{name}が作成されました。"
