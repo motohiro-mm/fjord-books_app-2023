@@ -1,13 +1,23 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+comment_by_alice_on_cherry_book:
+  user: alice
+  commentable_type: Book
+  commentable: cherry_book
+  content: I was impressed by how easy it was to understand.
 
-one:
-  user: one
-  commentable: one
-  commentable_type: Commentable
-  content: MyString
+comment_by_carol_on_alice_report:
+  user: carol
+  commentable_type: Report
+  commentable: alice_report
+  content: I'm hungry too!
 
-two:
-  user: two
-  commentable: two
-  commentable_type: Commentable
-  content: MyString
+comment_by_alice_on_carol_report:
+  user: alice
+  commentable_type: Report
+  commentable: carol_report
+  content: Let's go eat lunch!
+
+comment_by_alice_on_alice_report:
+  user: alice
+  commentable_type: Report
+  commentable: alice_report
+  content: I'm hungry very much!
