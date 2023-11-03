@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
-  test '#save_mentions' do
+  test 'mentions' do
     alice_report = reports(:alice_report)
     carol_report = reports(:carol_report)
 
