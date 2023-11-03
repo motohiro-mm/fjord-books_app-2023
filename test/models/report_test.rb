@@ -9,7 +9,7 @@ class ReportTest < ActiveSupport::TestCase
     carol_report = reports(:carol_report)
 
     assert alice_report.editable?(alice)
-    refute carol_report.editable?(alice)
+    assert_not carol_report.editable?(alice)
   end
 
   test '#created_on' do
