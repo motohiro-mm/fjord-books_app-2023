@@ -54,6 +54,9 @@ class ReportsTest < ApplicationSystemTestCase
     click_on 'この日報を削除', match: :first
 
     assert_text '日報が削除されました。'
+    assert_selector 'h1', text: '日報の一覧'
+    refute_text 'AliceReport'
+    refute_text 'I am hungry!'
   end
 
   test 'ログイン中アカウントの作成した日報の詳細画面を表示し「この日報を編集」リンクがあることを確認する' do

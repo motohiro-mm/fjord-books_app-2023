@@ -57,5 +57,8 @@ class BooksTest < ApplicationSystemTestCase
     click_on 'この本を削除', match: :first
 
     assert_text '本が削除されました。'
+    assert_selector 'h1', text: '本の一覧'
+    refute_text 'プロを目指す人のためのRuby入門'
+    refute_text 'プログラミング経験者のためのRuby入門書です。'
   end
 end
