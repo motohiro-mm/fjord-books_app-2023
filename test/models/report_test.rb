@@ -3,6 +3,15 @@
 require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
+  test '#editable?' do
+    alice = users(:alice)
+    alice_report = reports(:alice_report)
+    carol_report = reports(:carol_report)
+
+    assert alice_report.editable?(alice)
+    refute carol_report.editable?(alice)
+  end
+  
   test 'mentions' do
     alice_report = reports(:alice_report)
     carol_report = reports(:carol_report)
