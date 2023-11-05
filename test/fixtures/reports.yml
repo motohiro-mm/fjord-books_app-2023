@@ -1,11 +1,14 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+alice_report:
+  user: alice
+  title: AliceReport
+  content: I am hungry!
 
-one:
-  user: one
-  title: MyString
-  content: MyText
+carol_report:
+  user: carol
+  title: CarolReport
+  content: Are you still hungry? You eat too much!
 
-two:
-  user: two
-  title: MyString
-  content: MyText
+alice_report_mentioning_carol_report:
+  user: alice
+  title: Mention to CarolReport
+  content: I want to have lunch with you!

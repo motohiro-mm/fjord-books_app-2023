@@ -1,9 +1,9 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+cherry_book:
+  title: プロを目指す人のためのRuby入門
+  memo: プログラミング経験者のためのRuby入門書です。
+  author: 伊藤 淳一
 
-one:
-  title: MyString
-  memo: MyText
-
-two:
-  title: MyString
-  memo: MyText
+erd_lesson:
+  title: 楽々ERDレッスン
+  memo: 実在する帳票から本当に使えるテーブル設計を導く画期的な本！
+  author: 羽生 章洋
